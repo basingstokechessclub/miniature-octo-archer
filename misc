@@ -1,0 +1,87 @@
+<?php
+include 'core/init.php';
+include 'includes/overall/header.php';
+?>
+<h1>Administration Home Page</h1>
+
+<IMG STYLE="position:absolute; TOP:180px; LEFT:60px; WIDTH:600px; HEIGHT:400px" SRC="http://basingstokechessclub.co.uk/church1.jpg
+">
+
+<IMG STYLE="position:absolute; TOP:586px; LEFT:146px; WIDTH:400px; HEIGHT:30px" SRC="http://basingstokechessclub.co.uk/php/Animation2.gif
+">
+
+ <?php include 'includes/overall/footer.php'; ?>
+ 
+ <?php
+
+?>
+<html>
+<center>
+<h1>________________<br /><br />
+Members Database<br />
+________________</h1> <br />
+ <h2>Forwarding E-Mails</h2><br />
+david@basingstokechessclub.co.uk forwarded to davidgrahambcs@yahoo.co.uk <br /><br />
+joe.french@basingstokechessclub.co.uk forwarded to joefrench86@hotmail.co.uk <br /><br />
+admin@basingstokechessclub.co.uk forwarded to basingstokechessclub@outlook.com<br /><br /> <br /><br />
+</html>
+
+<h1>________________<br /><br />
+Members <br />
+________________</h1> <br />
+<?php
+
+//Members Database Details:
+
+$dbhost = 'mysql16.000webhost.com';
+$dbuser = 'a1304468_admin';
+$dbpass = 'b8073313';
+$conn = mysql_connect($dbhost, $dbuser, $dbpass);
+if(! $conn )
+{
+  die('Could not connect: ' . mysql_error());
+}
+$sql = 'SELECT * FROM users';
+
+mysql_select_db('a1304468_bcc');
+$retval = mysql_query( $sql, $conn );
+if(! $retval )
+{
+  die('Could not get data: ' . mysql_error());
+}
+while($row = mysql_fetch_array($retval, MYSQL_NUM))
+{
+  ?>
+  <html>
+ <center>
+
+  <?php
+    echo "User ID:{$row[0]}  <br> ".
+         "Username: {$row[1]} <br> ".
+         "Password : {$row[2]} <br> ".
+         "Real Password: {$row[3]} <br> ".
+         "First Name : {$row[4]} <br> ".
+         "Second Name: {$row[5]} <br> ".
+         "E-Mail : {$row[6]} <br> ".
+         "E-Mail Code: {$row[7]} <br> ".
+         "Active : {$row[8]} <br> ".
+         "Password Recovery: {$row[5]} <br> ".
+         "Type : {$row[6]} <br> ".
+         "Allow E-Mail: {$row[7]} <br> ".
+         "Profile : {$row[8]} <br><br> ".
+         "--------------------------------<br /><br />";
+}
+$first_name = "David";
+mysql_free_result($retval);
+echo "All Members Data Successfully Retrieved\n";
+echo $first_name;
+?>
+<html>
+<br />
+<?php
+echo "Today is:" . date("l");
+echo " - " . date("d/m/Y") . "<br /><br />";
+echo "--------------------------------<br /><br />";
+mysql_close($conn);
+?>
+
